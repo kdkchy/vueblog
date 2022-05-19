@@ -17,8 +17,10 @@
       <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
               <div v-if="error">{{ error }}</div>
+              <div v-if="!isLoading">
                 <PostList :posts="posts"></PostList>
-              <div v-if="!posts.length">
+              </div>
+              <div v-if="isLoading">
                   <Loading/>
               </div>
           </div>
@@ -38,9 +40,9 @@ export default {
     Loading
   },
   setup () {
-    const { error, posts, load } = getPosts();
+    const { error, posts, load, isLoading } = getPosts();
     load()
-    return { posts, error }
+    return { posts, error, isLoading }
   },
 }
 </script>
